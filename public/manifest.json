@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Düğün Fotoğraf",
+  "name": "Düğün Fotoğraf Galerisi",
+  "description": "Düğün ve etkinliklerde fotoğraf çekme uygulaması",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,10 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ec4899",
+  "background_color": "#fdf2f8",
+  "orientation": "portrait",
+  "scope": "/",
+  "categories": ["photography", "social", "lifestyle"],
+  "lang": "tr"
 }
