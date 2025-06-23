@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
-import image from '/Users/samederturk/Desktop/wedding-app/wedding-photo-app/src/seyfullahbahar.jpeg'
+import image from '/Users/samederturk/Desktop/wedding-app/wedding-photo-app/public/seyfullahbahar.jpeg'
 
 function App() {
   const [photos, setPhotos] = useState([]);
