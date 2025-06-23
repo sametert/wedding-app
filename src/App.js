@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
-import image from '/Users/samederturk/Desktop/wedding-app/wedding-photo-app/public/seyfullahbahar.jpeg'
+// import image from '/Users/samederturk/Desktop/wedding-app/wedding-photo-app/src/seyfullahbahar.jpeg'
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -161,7 +161,7 @@ function App() {
       <div className="flex flex-col items-center justify-center mt-6 mb-8 px-2">
         <div className="bg-white/80 rounded-3xl shadow-xl p-4 flex flex-col items-center w-full max-w-md">
           <img
-            src={image}
+            src="/seyfullahbahar.jpeg"
             alt="Seyfullah & Bahar"
             className="w-36 h-36 sm:w-48 sm:h-48 object-cover rounded-full border-4 border-pink-400 shadow-lg mb-3"
             style={{ objectPosition: 'center top' }}
