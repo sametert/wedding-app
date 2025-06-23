@@ -14,6 +14,7 @@ function App() {
   const [nameInput, setNameInput] = useState('');
   const fileInputRef = useRef(null);
   const editFileInputRef = useRef(null);
+  const [modalPhoto, setModalPhoto] = useState(null);
 
   // Kullanıcı ismini localStorage'dan al veya modal aç
   useEffect(() => {
@@ -63,6 +64,19 @@ function App() {
       fileInputRef.current.click();
     }
   };
+
+  // Sayfa açıldığında localStorage'dan fotoğrafları yükle
+  useEffect(() => {
+    const storedPhotos = localStorage.getItem('wedding-photos');
+    if (storedPhotos) {
+      setPhotos(JSON.parse(storedPhotos));
+    }
+  }, []);
+
+  // photos değiştiğinde localStorage'a kaydet
+  useEffect(() => {
+    localStorage.setItem('wedding-photos', JSON.stringify(photos));
+  }, [photos]);
 
   // Anı ekle
   const handleAddMemory = (e) => {
@@ -259,9 +273,9 @@ function App() {
               <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
                 📸 Paylaşılan Anılar ({photos.length})
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                 {photos.map((photo) => (
-                  <div key={photo.id} className="relative group">
+                  <div key={photo.id} className="relative group cursor-pointer" onClick={() => editingId ? null : setModalPhoto(photo)}>
                     <div className="bg-white/90 rounded-2xl shadow-xl overflow-hidden flex flex-col h-full border border-pink-100 hover:scale-[1.025] hover:shadow-2xl transition-transform duration-200">
                       {editingId === photo.id ? (
                         <>
@@ -318,7 +332,7 @@ function App() {
                           <img
                             src={photo.dataUrl}
                             alt={photo.name || 'Yüklenen fotoğraf'}
-                            className="w-full h-48 object-cover"
+                            className="w-full aspect-[3/4] object-cover"
                           />
                           <div className="p-4 flex-1 flex flex-col">
                             <p className="font-bold text-pink-600 text-lg mb-1">{photo.name}</p>
@@ -331,14 +345,14 @@ function App() {
                       {userName && userName === photo.name && editingId !== photo.id && (
                         <>
                           <button
-                            onClick={() => startEdit(photo)}
+                            onClick={e => { e.stopPropagation(); startEdit(photo); }}
                             className="absolute top-2 left-2 bg-yellow-400 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-yellow-500"
                             title="Düzenle"
                           >
                             ✎
                           </button>
                           <button
-                            onClick={() => deletePhoto(photo.id)}
+                            onClick={e => { e.stopPropagation(); deletePhoto(photo.id); }}
                             className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
                             title="Sil"
                           >
@@ -364,6 +378,34 @@ function App() {
           )}
         </div>
       </div>
+      {/* Modal: Fotoğraf Detay */}
+      {modalPhoto && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={() => setModalPhoto(null)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-2xl p-4 max-w-xs w-full sm:max-w-md relative flex flex-col items-center"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-2 right-2 text-2xl text-gray-400 hover:text-pink-500 font-bold focus:outline-none"
+              onClick={() => setModalPhoto(null)}
+              aria-label="Kapat"
+            >
+              ×
+            </button>
+            <img
+              src={modalPhoto.dataUrl}
+              alt={modalPhoto.name}
+              className="w-full max-h-80 object-contain rounded-xl mb-4 border shadow"
+            />
+            <div className="text-pink-600 font-bold text-lg mb-1 text-center">{modalPhoto.name}</div>
+            <div className="text-gray-700 text-base mb-2 text-center">{modalPhoto.desc}</div>
+            <div className="text-xs text-gray-400 text-center">{modalPhoto.timestamp}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
