@@ -15,6 +15,10 @@ function App() {
   const fileInputRef = useRef(null);
   const editFileInputRef = useRef(null);
   const [modalPhoto, setModalPhoto] = useState(null);
+  const [adminMode, setAdminMode] = useState(false);
+  const [showAdminModal, setShowAdminModal] = useState(false);
+  const [adminPin, setAdminPin] = useState('');
+  const ADMIN_PIN = '1438';
 
   // Kullanıcı ismini localStorage'dan al veya modal aç
   useEffect(() => {
@@ -160,17 +164,33 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-200 flex flex-col">
-      {/* Sağ üstte sabit çıkış butonu */}
-      {userName && !showNameModal && (
-        <div className="fixed top-4 right-4 z-50">
+      {/* Sağ üstte sabit çıkış ve admin butonları */}
+      <div className="fixed top-4 right-4 z-50 flex gap-2">
+        {userName && !showNameModal && (
           <button
             onClick={handleLogout}
             className="px-4 py-2 rounded-full bg-white/80 text-pink-600 text-xs font-semibold hover:bg-pink-100 border border-pink-200 shadow transition-all"
           >
             Çıkış Yap / İsmini Değiştir
           </button>
-        </div>
-      )}
+        )}
+        {!adminMode && (
+          <button
+            onClick={() => setShowAdminModal(true)}
+            className="px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-semibold shadow hover:scale-105 transition-all"
+          >
+            Admin Modu
+          </button>
+        )}
+        {adminMode && (
+          <button
+            onClick={() => setAdminMode(false)}
+            className="px-4 py-2 rounded-full bg-yellow-400 text-white text-xs font-semibold shadow hover:bg-yellow-500 transition-all"
+          >
+            Admin Çıkış
+          </button>
+        )}
+      </div>
       {/* Gelin & Damat Fotoğrafı ve İsimleri */}
       <div className="flex flex-col items-center justify-center mt-6 mb-8 px-2">
         <div className="bg-white/80 rounded-3xl shadow-xl p-4 flex flex-col items-center w-full max-w-md">
@@ -205,6 +225,51 @@ function App() {
               className="w-full py-2 rounded-full font-bold text-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
             >
               Devam Et
+            </button>
+          </form>
+        </div>
+      )}
+      {/* Admin Pin Modal */}
+      {showAdminModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              if (adminPin === ADMIN_PIN) {
+                setAdminMode(true);
+                setShowAdminModal(false);
+                setAdminPin('');
+              } else {
+                alert('Yanlış pin!');
+                setAdminPin('');
+              }
+            }}
+            className="bg-white rounded-lg shadow-lg p-8 max-w-xs w-full"
+          >
+            <h2 className="text-2xl font-bold text-pink-600 mb-4 text-center">Admin Girişi</h2>
+            <label className="block text-gray-700 font-semibold mb-2 text-center">Pin Kodu:</label>
+            <input
+              type="password"
+              value={adminPin}
+              onChange={e => setAdminPin(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 mb-4 text-center"
+              placeholder="****"
+              maxLength={8}
+              required
+              autoFocus
+            />
+            <button
+              type="submit"
+              className="w-full py-2 rounded-full font-bold text-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+            >
+              Giriş Yap
+            </button>
+            <button
+              type="button"
+              onClick={() => { setShowAdminModal(false); setAdminPin(''); }}
+              className="w-full mt-2 py-2 rounded-full font-bold text-lg bg-gray-200 text-gray-600 hover:bg-gray-300 transition-all"
+            >
+              Vazgeç
             </button>
           </form>
         </div>
@@ -341,8 +406,8 @@ function App() {
                           </div>
                         </>
                       )}
-                      {/* Sadece kendi anısında düzenle ve sil butonu */}
-                      {userName && userName === photo.name && editingId !== photo.id && (
+                      {/* Sadece kendi anısında veya admin modda düzenle ve sil butonu */}
+                      {(adminMode || (userName && userName === photo.name && editingId !== photo.id)) && (
                         <>
                           <button
                             onClick={e => { e.stopPropagation(); startEdit(photo); }}
