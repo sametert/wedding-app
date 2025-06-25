@@ -1,0 +1,30 @@
+{
+  "short_name": "Düğün Fotoğraf",
+  "name": "Düğün Fotoğraf Galerisi",
+  "description": "Düğün ve etkinliklerde fotoğraf çekme uygulaması",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ec4899",
+  "background_color": "#fdf2f8",
+  "orientation": "portrait",
+  "scope": "/",
+  "categories": ["photography", "social", "lifestyle"],
+  "lang": "tr"
+}
