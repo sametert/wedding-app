@@ -7,10 +7,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
     "firebase": "^11.9.1",
-=======
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
@@ -39,13 +36,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.16"
-=======
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
   }
 }
