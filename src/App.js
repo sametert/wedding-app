@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
-<<<<<<< HEAD
 import { 
   uploadPhoto, 
   addMemory, 
@@ -8,8 +7,6 @@ import {
   updateMemory, 
   deleteMemory as deleteMemoryFromDB 
 } from './firebase';
-=======
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
 // import image from '/Users/samederturk/Desktop/wedding-app/wedding-photo-app/src/seyfullahbahar.jpeg'
 
 function App() {
@@ -28,11 +25,8 @@ function App() {
   const [adminMode, setAdminMode] = useState(false);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminPin, setAdminPin] = useState('');
-<<<<<<< HEAD
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
-=======
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
   const ADMIN_PIN = '1438';
 
   // Kullanıcı ismini localStorage'dan al veya modal aç
@@ -46,7 +40,6 @@ function App() {
     }
   }, []);
 
-<<<<<<< HEAD
   // Firebase'dan anıları yükle
   useEffect(() => {
     loadMemories();
@@ -69,8 +62,6 @@ function App() {
     }
   };
 
-=======
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
   // İsim modalı submit
   const handleNameSubmit = (e) => {
     e.preventDefault();
@@ -109,7 +100,6 @@ function App() {
     }
   };
 
-<<<<<<< HEAD
   // Anı ekle - Firebase ile
   const handleAddMemory = async (e) => {
     e.preventDefault();
@@ -156,38 +146,6 @@ function App() {
     } finally {
       setUploading(false);
     }
-=======
-  // Sayfa açıldığında localStorage'dan fotoğrafları yükle
-  useEffect(() => {
-    const storedPhotos = localStorage.getItem('wedding-photos');
-    if (storedPhotos) {
-      setPhotos(JSON.parse(storedPhotos));
-    }
-  }, []);
-
-  // photos değiştiğinde localStorage'a kaydet
-  useEffect(() => {
-    localStorage.setItem('wedding-photos', JSON.stringify(photos));
-  }, [photos]);
-
-  // Anı ekle
-  const handleAddMemory = (e) => {
-    e.preventDefault();
-    if (!desc.trim() || !selectedFile || !previewUrl) return;
-    setPhotos(prev => [
-      {
-        id: Date.now() + Math.random(),
-        dataUrl: previewUrl,
-        name: userName,
-        desc: desc.trim(),
-        timestamp: new Date().toLocaleString('tr-TR')
-      },
-      ...prev
-    ]);
-    setDesc('');
-    setSelectedFile(null);
-    setPreviewUrl('');
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
   };
 
   // Edit modunu aç
@@ -195,11 +153,7 @@ function App() {
     setEditingId(photo.id);
     setEditFields({
       desc: photo.desc,
-<<<<<<< HEAD
       previewUrl: photo.dataUrl || photo.photoURL,
-=======
-      previewUrl: photo.dataUrl,
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
       file: null
     });
   };
@@ -230,7 +184,6 @@ function App() {
     }
   };
 
-<<<<<<< HEAD
   // Edit kaydet - Firebase ile
   const handleEditSave = async (id) => {
     try {
@@ -284,21 +237,6 @@ function App() {
     } finally {
       setUploading(false);
     }
-=======
-  // Edit kaydet
-  const handleEditSave = (id) => {
-    setPhotos(prev => prev.map(photo =>
-      photo.id === id
-        ? {
-            ...photo,
-            desc: editFields.desc,
-            dataUrl: editFields.previewUrl
-          }
-        : photo
-    ));
-    setEditingId(null);
-    setEditFields({ desc: '', previewUrl: '', file: null });
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
   };
 
   // Edit iptal
@@ -307,7 +245,6 @@ function App() {
     setEditFields({ desc: '', previewUrl: '', file: null });
   };
 
-<<<<<<< HEAD
   // Fotoğraf silme - Firebase ile
   const deletePhoto = async (photoId) => {
     if (!window.confirm('Bu anıyı silmek istediğinizden emin misiniz?')) {
@@ -333,10 +270,6 @@ function App() {
     } finally {
       setLoading(false);
     }
-=======
-  const deletePhoto = (photoId) => {
-    setPhotos(prevPhotos => prevPhotos.filter(photo => photo.id !== photoId));
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
   };
 
   return (
@@ -497,24 +430,14 @@ function App() {
           </div>
           <button
             type="submit"
-<<<<<<< HEAD
             disabled={!desc.trim() || !selectedFile || !previewUrl || uploading}
             className={`w-full py-3 rounded-full font-bold text-lg shadow-lg transition-all duration-200 mt-2 ${
               (!desc.trim() || !selectedFile || !previewUrl || uploading)
-=======
-            disabled={!desc.trim() || !selectedFile || !previewUrl}
-            className={`w-full py-3 rounded-full font-bold text-lg shadow-lg transition-all duration-200 mt-2 ${
-              (!desc.trim() || !selectedFile || !previewUrl)
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
                 ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-xl hover:scale-105'
             }`}
           >
-<<<<<<< HEAD
             {uploading ? '📤 Yükleniyor...' : '➕ Anıyı Ekle'}
-=======
-            ➕ Anıyı Ekle
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
           </button>
         </form>
 
@@ -561,24 +484,14 @@ function App() {
                             <button
                               type="button"
                               onClick={() => handleEditSave(photo.id)}
-<<<<<<< HEAD
                               disabled={!editFields.desc.trim() || !editFields.previewUrl || uploading}
                               className={`px-4 py-1 rounded-full font-semibold text-sm shadow transition-all duration-200 ${
                                 (!editFields.desc.trim() || !editFields.previewUrl || uploading)
-=======
-                              disabled={!editFields.desc.trim() || !editFields.previewUrl}
-                              className={`px-4 py-1 rounded-full font-semibold text-sm shadow transition-all duration-200 ${
-                                (!editFields.desc.trim() || !editFields.previewUrl)
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
                                   ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
                                   : 'bg-green-500 text-white hover:bg-green-600'
                               }`}
                             >
-<<<<<<< HEAD
                               {uploading ? 'Kaydediliyor...' : 'Kaydet'}
-=======
-                              Kaydet
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
                             </button>
                             <button
                               type="button"
@@ -592,11 +505,7 @@ function App() {
                       ) : (
                         <>
                           <img
-<<<<<<< HEAD
                             src={photo.dataUrl || photo.photoURL}
-=======
-                            src={photo.dataUrl}
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
                             alt={photo.name || 'Yüklenen fotoğraf'}
                             className="w-full aspect-[3/4] object-cover"
                           />
@@ -614,10 +523,7 @@ function App() {
                             onClick={e => { e.stopPropagation(); startEdit(photo); }}
                             className="absolute top-2 left-2 bg-yellow-400 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-yellow-500"
                             title="Düzenle"
-<<<<<<< HEAD
                             disabled={uploading}
-=======
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
                           >
                             ✎
                           </button>
@@ -625,10 +531,7 @@ function App() {
                             onClick={e => { e.stopPropagation(); deletePhoto(photo.id); }}
                             className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
                             title="Sil"
-<<<<<<< HEAD
                             disabled={loading}
-=======
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
                           >
                             ×
                           </button>
@@ -641,7 +544,6 @@ function App() {
             </>
           ) : (
             <div className="text-center py-12">
-<<<<<<< HEAD
               {loading ? (
                 <>
                   <div className="text-6xl mb-4">⏳</div>
@@ -660,15 +562,6 @@ function App() {
                   </p>
                 </>
               )}
-=======
-              <div className="text-6xl mb-4">📷</div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                Henüz anı eklenmedi
-              </h3>
-              <p className="text-gray-500">
-                Anınızı ve fotoğrafınızı eklemek için yukarıdaki formu doldurun!
-              </p>
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
             </div>
           )}
         </div>
@@ -691,11 +584,7 @@ function App() {
               ×
             </button>
             <img
-<<<<<<< HEAD
               src={modalPhoto.dataUrl || modalPhoto.photoURL}
-=======
-              src={modalPhoto.dataUrl}
->>>>>>> 076fc3ff38ea5082ef0a5e7394b3b90f6631336c
               alt={modalPhoto.name}
               className="w-full max-h-80 object-contain rounded-xl mb-4 border shadow"
             />
