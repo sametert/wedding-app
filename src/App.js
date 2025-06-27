@@ -388,7 +388,7 @@ function App() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">💒 Düğün Anı Galerisi</h1>
-          <p className="text-gray-600 text-base sm:text-lg">Anınızı ve fotoğrafınızı paylaşın!</p>
+          <p className="text-gray-600 text-base sm:text-lg">💖Anı Yakala Ve Bizimle Paylaş💖</p>
           {userName && <p className="text-pink-600 mt-2 font-semibold text-base sm:text-lg">👤 {userName}</p>}
         </div>
 
