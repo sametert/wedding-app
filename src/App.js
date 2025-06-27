@@ -594,6 +594,10 @@ function App() {
           </div>
         </div>
       )}
+      {/* Klasik alt sabit footer */}
+      <div className="w-full text-center text-xs text-gray-500 bg-white/80 rounded-t-xl px-4 py-2 shadow backdrop-blur-md select-none">
+        © 2025 Wedloria. Tüm hakları saklıdır.
+      </div>
     </div>
   );
 }

@@ -23,13 +23,13 @@ import {
 
 // Firebase konfigürasyonu
 const firebaseConfig = {
-  apiKey: "AIzaSyDfuWXStyOpBPsNFqu2YRIkZVSFuEcx5ag",
-  authDomain: "wedding-app-3028c.firebaseapp.com",
-  projectId: "wedding-app-3028c",
-  storageBucket: "wedding-app-3028c.firebasestorage.app",
-  messagingSenderId: "43724186516",
-  appId: "1:43724186516:web:08db2be30acbd1eb7aa581",
-  measurementId: "G-PWYC5H3553"
+  apiKey: "AIzaSyC8PxjwxzUqPnp1PDFyhJD6S0892mwg4mI",
+  authDomain: "wedding-photo-app-5e673.firebaseapp.com",
+  projectId: "wedding-photo-app-5e673",
+  storageBucket: "wedding-photo-app-5e673.firebasestorage.app",
+  messagingSenderId: "767705981953",
+  appId: "1:767705981953:web:7ea6c09ddc858bed3a4c00",
+  measurementId: "G-EBQ8Q8R8MQ"
 };
 
 // Firebase'i başlat
