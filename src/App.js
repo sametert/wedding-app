@@ -27,7 +27,7 @@ function App() {
   const [adminPin, setAdminPin] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const ADMIN_PIN = '1438';
+  const ADMIN_PIN = '1525';
 
   // Kullanıcı ismini localStorage'dan al veya modal aç
   useEffect(() => {
